@@ -67,6 +67,7 @@ public class Complex {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == this) return true;
         if (obj instanceof Double) {
             return Math.abs((Double)obj - this.real) < E;
         }
