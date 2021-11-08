@@ -19,4 +19,12 @@ public class Complex {
         this.real = c.real;
         this.imag = c.imag;
     }
+
+    public double getImag() {
+        return imag;
+    }
+
+    public double getReal() {
+        return real;
+    }
 }
