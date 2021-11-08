@@ -20,7 +20,7 @@ public class Complex {
         this.imag = c.imag;
     }
 
-    public double getImag() {
+    public double getImaginary() {
         return imag;
     }
 
@@ -44,6 +44,18 @@ public class Complex {
     public static Complex mul(Complex c1, Complex c2){
         double r = c1.real * c2.real - c1.imag * c2.imag;
         double i = c1.imag * c2.real + c2.imag * c1.real;
+        return new Complex(r, i);
+    }
+
+    public Complex conjugate() {
+        return new Complex(this.real, -this.imag);
+    }
+
+    public static Complex div(Complex c1, Complex c2){
+        double r = c1.real * c2.real + c1.imag * c2.imag;
+        r = r / (c2.real * c2.real + c2.imag * c2.imag);
+        double i = - c1.imag * c2.real + c2.imag * c1.real;
+        i = i / (c2.real * c2.real + c2.imag * c2.imag);
         return new Complex(r, i);
     }
 }
