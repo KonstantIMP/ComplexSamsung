@@ -7,11 +7,13 @@ public class Complex {
     private double real;
     private double imag;
 
+    private static final double E = 0.001;
+
     public Complex() {
         real = imag = 0.0;
     }
 
-    public Complex(double real, double imag){
+    public Complex(double real, double imag) {
         this.real = real; this.imag = imag;
     }
 
@@ -63,8 +65,15 @@ public class Complex {
         return Math.sqrt(this.real * this.real + this.imag * this.imag);
     }
 
-    public static boolean equals(Complex c1, Complex c2){
-        return c1.real == c2.real && c2.imag == c1.imag;
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Double) {
+            return Math.abs((Double)obj - this.real) < E;
+        }
+        else if (obj instanceof Complex){
+            return Math.abs(((Complex)obj).real - this.real) < E && Math.abs(((Complex)obj).imag - this.imag) < E;
+        }
+        else return false;
     }
 
     public Complex neg() {
