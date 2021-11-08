@@ -54,7 +54,7 @@ public class Complex {
     public static Complex div(Complex c1, Complex c2){
         double r = c1.real * c2.real + c1.imag * c2.imag;
         r = r / (c2.real * c2.real + c2.imag * c2.imag);
-        double i = - c1.imag * c2.real + c2.imag * c1.real;
+        double i = c1.imag * c2.real - c2.imag * c1.real;
         i = i / (c2.real * c2.real + c2.imag * c2.imag);
         return new Complex(r, i);
     }
@@ -78,5 +78,48 @@ public class Complex {
         }
         else if (this.real == 0) return Double.toString(this.imag) + "i";
         return Double.toString(this.real);
+    }
+
+    public static Complex parse(String c){
+        double r = 0, i = 0;
+
+        if (!c.contains("i")) r = Double.parseDouble(c);
+        else if (!c.contains("+") && !c.contains("-")) i = Double.parseDouble(c.split("i")[0]);
+        else {
+            String sec = c.contains("+") ? "+" : "-";
+            r = Double.parseDouble(c.split(sec)[0]);
+            i = Double.parseDouble(c.split(sec)[1].split("i")[0]);
+            if (sec.equals("-")) i = -i;
+        }
+
+        return new Complex(r, i);
+    }
+
+    public double getArgument() {
+        if (this.imag == 0) return 0;
+        return (Math.atan(this.imag / this.real) + Math.PI) % Math.PI;
+    }
+
+    public String eString() {
+        String a = Double.toString(this.getArgument());
+        return this.abs() + "(cos(" + a + ") + sin(" + a + ")i)";
+    }
+
+    public Complex pow(double n) {
+        double r = Math.pow(this.abs(), n);
+        double arg = this.getArgument() * n;
+        return new Complex(r * Math.cos(arg), r * Math.sin(arg));
+    }
+
+    public Complex sqrt() {
+        return this.pow(0.5);
+    }
+
+    public boolean checkReal() {
+        return this.imag == 0;
+    }
+
+    public boolean checkImaginary() {
+        return this.real == 0;
     }
 }
