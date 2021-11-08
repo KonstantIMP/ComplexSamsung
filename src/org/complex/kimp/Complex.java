@@ -58,4 +58,25 @@ public class Complex {
         i = i / (c2.real * c2.real + c2.imag * c2.imag);
         return new Complex(r, i);
     }
+
+    public double abs(){
+        return Math.sqrt(this.real * this.real + this.imag * this.imag);
+    }
+
+    public static boolean equals(Complex c1, Complex c2){
+        return c1.real == c2.real && c2.imag == c1.imag;
+    }
+
+    public Complex neg() {
+        return new Complex(-this.real, -this.imag);
+    }
+
+    public String toString(){
+        if (this.real != 0 && this.imag != 0) {
+            if(this.imag < 0) return Double.toString(this.real) + Double.toString(this.imag) + "i";
+            else return Double.toString(this.real) + "+" + Double.toString(this.imag) + "i";
+        }
+        else if (this.real == 0) return Double.toString(this.imag) + "i";
+        return Double.toString(this.real);
+    }
 }
